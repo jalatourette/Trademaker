@@ -1,0 +1,17 @@
+from selenium import webdriver
+
+
+url = 'https://www.zacks.com/stock/research/GOOG/brokerage-recommendations'
+driver = webdriver.Chrome('C:\Program Files (x86)\chromedriver.exe')
+driver.get(url)
+
+
+timestamp = driver.find_element_by_id('timestamp').text
+
+curr_abr = driver.find_elements_by_id('current_abr')
+for cabr in curr_abr:
+    c_abr = cabr.find_element_by_xpath('//*[@id="current_abr"]/table/tbody/tr[1]/td[2]/span').text
+    number_of_recs = cabr.find_element_by_xpath('//*[@id="current_abr"]/table/tbody/tr[3]/td[2]/span').text
+    avg_target_price = cabr.find_element_by_xpath('//*[@id="current_abr"]/table/tbody/tr[4]/td[2]/span').text
+
+driver.quit()
