@@ -1,0 +1,36 @@
+from selenium import webdriver
+
+
+url = 'https://www.zacks.com/stock/research/GOOG/company-reports'
+driver = webdriver.Chrome('C:\Program Files (x86)\chromedriver.exe')
+driver.get(url)
+
+
+timestamp = driver.find_element_by_id('timestamp').text
+
+general_info = driver.find_elements_by_id('general_information')
+for gen_info in general_info:
+    industry = gen_info.find_element_by_xpath('//*[@id="general_information"]/table/tbody/tr[1]/td[2]/span/a').text
+    sector = gen_info.find_element_by_xpath('//*[@id="general_information"]/table/tbody/tr[2]/td[2]/span/a').text
+    fiscal_year_end = gen_info.find_element_by_xpath('//*[@id="general_information"]/table/tbody/tr[3]/td[2]/span').text
+    last_reported_quarter = gen_info.find_element_by_xpath('//*[@id="general_information"]/table/tbody/tr[4]/td[2]/span').text
+    next_eps_date = gen_info.find_element_by_xpath('//*[@id="general_information"]/table/tbody/tr[5]/td[2]/span').text
+
+price_volume_info = driver.find_elements_by_id('price_volume_information')
+for price_vol_info in price_volume_info:
+    yesterday_closing_price = price_vol_info.find_element_by_xpath('//*[@id="price_volume_imformation"]/div[1]/table/tbody/tr[2]/td[2]').text
+    target_price_consensus = price_vol_info.find_element_by_xpath('//*[@id="price_volume_imformation"]/div[1]/table/tbody/tr[7]/td[2]').text
+
+market_cap_millions = driver.find_element_by_xpath('//*[@id="price_volume_imformation"]/div[3]/table[1]/tbody/tr[2]/td[2]').text
+dividend_yield = driver.find_element_by_xpath('//*[@id="price_volume_imformation"]/div[3]/table[2]/tbody/tr[1]/td[2]/a').text
+
+fin_overview_details = driver.find_elements_by_id('financial_overview_details')
+for fin_overview_deets in fin_overview_details:
+    pe_f1 = driver.find_element_by_xpath('//*[@id="financial_overview_details"]/div[1]/table[1]/tbody/tr[1]/td[2]').text
+    eps_growth_vs_prev_year = driver.find_element_by_xpath('//*[@id="financial_overview_details"]/div[1]/table[2]/tbody/tr[1]/td[2]').text
+    eps_growth_vs_prev_quarter = driver.find_element_by_xpath('//*[@id="financial_overview_details"]/div[1]/table[2]/tbody/tr[2]/td[2]').text
+    sales_growth_vs_prev_year = driver.find_element_by_xpath('//*[@id="financial_overview_details"]/div[1]/table[3]/tbody/tr[1]/td[2]').text
+    sales_growth_vs_prev_quarter = driver.find_element_by_xpath('//*[@id="financial_overview_details"]/div[1]/table[3]/tbody/tr[2]/td[2]').text
+    price_over_book = driver.find_element_by_xpath('//*[@id="financial_overview_details"]/div[2]/table[1]/tbody/tr[1]/td[2]/a').text
+    price_over_cash_flow = driver.find_element_by_xpath('//*[@id="financial_overview_details"]/div[2]/table[1]/tbody/tr[2]/td[2]').text
+    price_over_sales = driver.find_element_by_xpath('//*[@id="financial_overview_details"]/div[2]/table[1]/tbody/tr[3]/td[2]/a').text
