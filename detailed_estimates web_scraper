@@ -1,0 +1,42 @@
+from selenium import webdriver
+
+
+url = 'https://www.zacks.com/stock/quote/GOOG/detailed-estimates'
+driver = webdriver.Chrome('C:\Program Files (x86)\chromedriver.exe')
+driver.get(url)
+
+
+timestamp = driver.find_element_by_id('timestamp').text
+
+detailed_estimates = driver.find_elements_by_class_name('two_col')
+for estimate in detailed_estimates:
+    next_report_date = estimate.find_element_by_xpath('//*[@id="detail_estimate"]/table/tbody/tr[1]/th/span').text
+    eps_current_quarter = estimate.find_element_by_xpath('//*[@id="detail_estimate"]/table/tbody/tr[2]/th/span').text
+    eps_last_quarter = estimate.find_element_by_xpath('//*[@id="detail_estimate"]/table/tbody/tr[3]/th/span').text
+    last_eps_surprise = estimate.find_element_by_xpath('//*[@id="detail_estimate"]/table/tbody/tr[4]/th').text
+    earnings_esp = estimate.find_element_by_xpath('//*[@id="detailed_estimate"]/div[1]/section[2]/table/tbody/tr[1]/th').text
+    eps_ttm = estimate.find_element_by_xpath('//*[@id="detailed_estimate"]/div[1]/section[2]/table/tbody/tr[4]/th/span').text
+
+pe = driver.find_element_by_xpath('//*[@id="earnings_growth_estimates"]/table/tbody/tr[7]/td[2]/a').text
+ 
+detailed_earning_estimate = driver.find_elements_by_id('detailed_estimate_full_body')
+for defb in detailed_earning_estimate:
+    sales_current_quarter = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[1]/td[2]/a').text
+    sales_next_quarter_ = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[1]/td[3]/a').text
+    sales_current_year = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[1]/td[4]/a').text
+    sales_next_year = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[1]/td[5]/a').text
+    yoy_growth_sales_current_quarter = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[6]/td[2]').text
+    yoy_growth_sales_next_quarter = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[6]/td[3]').text
+    yoy_growth_sales_current_year = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[6]/td[4]').text
+    yoy_growth_sales_next_year = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[6]/td[5]').text
+    earnings_current_quarter = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[1]/td[2]/a').text
+    earnings_next_quarter_ = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[1]/td[3]/a').text
+    earnings_current_year = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[1]/td[4]/a').text
+    earnings_next_year = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[1]/td[5]/a').text
+    yoy_growth_earnings_current_quarter = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[7]/td[2]').text
+    yoy_growth_earnings_next_quarter = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[7]/td[3]').text
+    yoy_growth_earnings_current_year = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[7]/td[4]').text
+    yoy_growth_earnings_next_year = defb.find_element_by_xpath('//*[@id="detailed_earnings_estimates"]/table/tbody/tr[7]/td[5]').text
+    #add surprise - reported earnings history after requirements clarification
+
+driver.quit()
