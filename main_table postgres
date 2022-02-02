@@ -1,0 +1,6 @@
+create table primary_price_data (
+  ticker varchar(5) primary key,
+  price_open numeric(256, 128),
+  price_close numeric(256, 128),
+  date date
+  );
