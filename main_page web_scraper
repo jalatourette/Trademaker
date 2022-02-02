@@ -1,0 +1,33 @@
+from selenium import webdriver
+
+
+url = 'https://www.zacks.com/stock/quote/GOOG'
+driver = webdriver.Chrome('C:\Program Files (x86)\chromedriver.exe')
+driver.get(url)
+
+
+timestamp = driver.find_element_by_id('timestamp').text
+price_close = driver.find_element_by_class_name('last_price').text
+zacks_rank = driver.find_element_by_class_name('rank_view').text
+
+
+sa = driver.find_elements_by_id('stock_activity')
+for values_sa in sa:
+
+    open_sa = values_sa.find_element_by_xpath('//*[@id="stock_activity"]/dl[1]/dd').text
+    fifty_two_week_low = values_sa.find_element_by_xpath('//*[@id="stock_activity"]/dl[4]/dd').text
+    fifty_two_week_high = values_sa.find_element_by_xpath('//*[@id="stock_activity"]/dl[5]/dd').text
+    avg_volume = values_sa.find_element_by_xpath('//*[@id="stock_activity"]/dl[6]/dd/span').text
+    market_cap = values_sa.find_element_by_xpath('//*[@id="stock_activity"]/dl[7]/dd/span').text
+    dividend = values_sa.find_element_by_xpath('//*[@id="stock_activity"]/dl[8]/dd/span').text
+    beta = values_sa.find_element_by_xpath('//*[@id="stock_activity"]/dl[9]/dd/span').text
+
+
+ske = driver.find_elements_by_id('stock_key_earnings')
+for values_ske in ske:
+    
+    expected_earnings_date = values_ske.find_element_by_xpath('//*[@id="stock_key_earnings"]/dl[5]/dd').text
+    peg_ratio = values_ske.find_element_by_xpath('//*[@id="stock_key_earnings"]/dl[9]/dd').text
+
+
+driver.quit()
