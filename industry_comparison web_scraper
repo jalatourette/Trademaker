@@ -1,0 +1,16 @@
+from selenium import webdriver
+
+driver = webdriver.Chrome('C:\Program Files (x86)\Chromedriver.exe')
+url = 'https://www.zacks.com/stock/research/GOOG/industry-comparison'
+driver.get(url)
+
+timestamp = driver.find_element_by_id('timestamp')
+
+finance = driver.find_elements_by_id('financials')
+for fin in finance:
+    price_over_earnings = fin.find_element_by_xpath('//*[@id="financials"]/table/tbody/tr[1]/td[2]/a').text
+    net_profit_margin = fin.find_element_by_xpath('//*[@id="financials"]/table/tbody/tr[5]/td[2]').text
+    return_on_equity = fin.find_element_by_xpath('//*[@id="financials"]/table/tbody/tr[6]/td[2]/a').text
+    debt_to_equity = fin.find_element_by_xpath('//*[@id="financials"]/table/tbody/tr[7]/td[2]/a').text
+
+driver.quit()
